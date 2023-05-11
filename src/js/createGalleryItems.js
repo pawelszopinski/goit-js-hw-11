@@ -1,7 +1,6 @@
 export const createGalleryItem = (element, button, photo) => {
   button.classList.remove('hidden');
-  const galleryItem = document.createElement('div');
-  galleryItem.innerHTML = `
+  const markup = `
     <div class="photo-card">
         <a href="${photo.largeImageURL}"><img src="${photo.webformatURL}" alt="${photo.tags}" title="${photo.tags} loading="lazy" /></a>
         <div class="info">
@@ -12,5 +11,5 @@ export const createGalleryItem = (element, button, photo) => {
         </div>
     </div>
     `;
-  element.append(galleryItem);
+    element.insertAdjacentHTML("beforeend", markup);
 };

@@ -42,14 +42,15 @@ const firstPhotosBatch = async () => {
   const data = await getImages();
   Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
   allPages = Math.ceil(data.totalHits / limit);
-  data.hits.forEach(photo => createGalleryItem(galleryEl, LoadMoreBtnEl, photo));
+  data.hits.forEach(photo =>
+    createGalleryItem(galleryEl, LoadMoreBtnEl, photo)
+  );
   new SimpleLightbox('#gallery a', {
     captionsData: 'alt',
     captionDelay: 250,
     uniqueImages: true,
     scrollZoom: true,
-    download: "Download it",
-   
+    captionPosition: 'top',
   });
 };
 
@@ -58,10 +59,15 @@ const nextPhotosBatch = async () => {
   try {
     if (displayingPage > allPages) throw new Error(error);
     const data = await getImages();
-    data.hits.forEach(photo => createGalleryItem(galleryEl, LoadMoreBtnEl, photo));
+    data.hits.forEach(photo =>
+      createGalleryItem(galleryEl, LoadMoreBtnEl, photo)
+    );
     new SimpleLightbox('#gallery a', {
       captionsData: 'alt',
       captionDelay: 250,
+      uniqueImages: true,
+      scrollZoom: true,
+      captionPosition: 'top',
     }).refresh();
   } catch (error) {
     Notiflix.Notify.warning(
